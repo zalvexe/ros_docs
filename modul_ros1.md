@@ -171,6 +171,11 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 ```
+dalam project() diisi dengan nama workspace   
+find_package() diisi dengan package-package yang kita gunakan di workspace   
+
+> CMakeLists ini pasti akan berbeda di setiap project, masih ada beberapa function di CMakeLists yang belum terpakai di sini :"]   
+
 ### Run program
 Setelah 
 Untuk run program ROS, kita akan perlu beberapa terminal :")     
@@ -181,51 +186,3 @@ roscore
 lanjut.. terminal kedua kita run node talker   
 ```
 ros run 
-
-## 2. Membuat Workspace, Package, dan Node
-  
-
-__Membuat Package :__   
-```catkin_create_pkg first_package std_msgs rospy roscpp```   
-Di sini kita membuat package bernama 'first_package' dengan beberapa dependencies yaitu std_msgs, rospy, dan roscpp  
-
-## 3. Build Workspace  
-Untuk build workspace, maka perlu kembali ke directory workspace   
-```cd ~/tutorial_ws/```   
-
-dan jalankan build command   
-```catkin_make```   
-
-## 4. Publisher dan Subscriber
-
-## 5. CMakeLists  
-CMakeLists selalu berbeda dan disesuaikan dengan package yang kita buat. Umumnya, CMakeLists terdiri dari beberapa komponen yaitu :  
-```cmake
-cmake_minimum_required(VERSION 3.0.2)
-project(rody1)
-```
-> dalam project() diisi dengan nama workspace
-```cmake
-add_compile_options(-std=c++11)
-
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-)
-```
-> find_package() diisi dengan package-package yang kita gunakan di workspace
-
-```cmake
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
-catkin_package(
-  CATKIN_DEPENDS roscpp std_msgs
-)
-```
-> dependencies pada pada catkin_package()
-
-## 6. XML
-
-## 7. Run ROS 1
-## 7. Custom Messages
