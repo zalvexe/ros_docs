@@ -259,7 +259,9 @@ terminal ketiga kita run node listener
 ```
 rosrun tutorial_ws listener
 ```
-kita bisa lihat bahwa listener dan talker saling mengirim dan menerima dengan jumlah count yang sinkron :D   
+![image](https://github.com/user-attachments/assets/563feaf6-3e25-4e24-9882-6b9cb123beb8)
+
+kita bisa lihat bahwa listener dan talker saling menerima dan mengirim dengan jumlah count yang sinkron :D   
 
 ## ------------------------------------- PART 1 DONE ----------------------------------
 
