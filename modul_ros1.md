@@ -141,9 +141,9 @@ Lanjut nih.. kita coba bikin simple publisher & subscriber
 Bikin workspace & package duluu  
 ```
 mkdir -p ~/tutorial_ws/src  
-
-cd ~/tutorial_ws/   
-
+cd ~/tutorial_ws/src
+catkin_create_pkg simple_demo_cpp roscpp std_msgs
+cd ~/tutorial_ws
 catkin_make
 ``` 
 > catkin_make itu buat build workspace yg kita bikin tadi
