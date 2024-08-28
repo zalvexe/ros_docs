@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/cd8ebbd5-9c1c-487d-b328-a98ae7c894fc)# ROS 1 - Noetic Modul 2024
+# ROS 1 - Noetic Modul 2024
 
 ## Apa itu ROS??  
 ROS (Robot Operating System) itu seperti sistem operasi buat robot, tapi bukan sistem operasi yang kita pakai sehari-hari di komputer. Bayangkan ROS sebagai toolkit besar yang menyediakan semua alat yang dibutuhkan robot untuk berpikir dan bertindak. Jadi, ROS itu semacam platform yang bikin robot bisa berinteraksi dengan dunia di sekelilingnya, ngolah data dari sensor, bergerak, dan berkomunikasi dengan perangkat lain.
@@ -16,6 +16,32 @@ Jadi, kalau kamu pengen bikin robot yang pintar, fleksibel, dan bisa berkomunika
 
 ![image](https://github.com/user-attachments/assets/5a85cc9c-f80c-4224-9df7-90751d3da54d)
 
+Komponen utama pada ROS terdiri dari :  
+__1. Node:__
+
+Node adalah unit eksekusi dasar dalam ROS. Setiap node adalah proses yang melakukan tugas tertentu, seperti membaca sensor, mengendalikan aktuator, atau melakukan komputasi.
+Node berkomunikasi satu sama lain menggunakan topik, layanan, dan parameter.
+
+__2. Master:__
+
+ROS Master bertindak sebagai pendaftar pusat yang mengelola informasi tentang node, topik, dan layanan.
+Master memungkinkan node untuk menemukan satu sama lain dan berkomunikasi. Tanpa Master, node ngga bisa berkomunikasi.
+
+__3. Parameter Server:__
+
+Parameter Server adalah penyimpanan pusat untuk parameter konfigurasi yang dapat diakses oleh semua node. Parameter dapat digunakan untuk menyimpan konfigurasi yang dapat diubah tanpa perlu memodifikasi kode sumber.
+
+__4. Topic:__
+
+Topik adalah mekanisme komunikasi yang digunakan untuk pertukaran pesan antar node secara asinkron.
+Node dapat menerbitkan (publish) pesan ke topik atau berlangganan (subscribe) ke topik untuk menerima pesan.
+
+__5. Service:__
+
+Layanan (service) adalah mekanisme komunikasi sinkron yang memungkinkan node untuk melakukan panggilan prosedur jarak jauh (RPC). Layanan terdiri dari permintaan (request) dan tanggapan (response).
+
+__6. Message:__
+Pesan (message) adalah struktur data yang digunakan untuk pertukaran informasi antar node melalui topik atau layanan. Pesan didefinisikan menggunakan file .msg yang menentukan tipe data dan struktur pesan.
 
 ## 1. Instalasi ROS 1 - Noetic
 [link untuk penjelasan lebih lengkap](https://wiki.ros.org/noetic/Installation/Ubuntu)  
@@ -67,7 +93,7 @@ source ~/.bashrc
 > untuk zsh bisa langsung diganti setup.zsh dan .zshrc
 
 
-### __Install Dependencies untuk Keperluan Building Package :__   
+### __Install Dependencies untuk Keperluan Building Package Python(optional) :__   
 ```
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
@@ -77,7 +103,37 @@ sudo rosdep init
 
 rosdep update
 ```   
-## 2. Tes ROS dengan Turtlesim, topics
+## 2. Tes ROS dengan Turtlesim, Topics
+Kita coba jalanin package turtlesim dari ROS..  
+untuk run beberapa nodes, kita perlu beberapa terminal:')   
+
+Terminal pertama, kita jalankan roscore sebagai master    
+```
+roscore
+```
+Lanjut kita buka terminal kedua untuk turtlesim  
+```
+rosrun turtlesim turtlesim_node
+```
+Setelah jalanin command tersebut, akan muncul window turtlesim  
+
+![image](https://github.com/user-attachments/assets/8454843a-9bdf-4e21-ae98-a909232d356e)   
+Tapi, kita belum bisa mengontrol turtle tersebut.. jadi kita perlu memanggil node lain sebagai controller  
+```
+rosrun turtlesim turtle_teleop_key
+```
+Sekarang, kita bisa mengontrol turtle dengan keyboard:D   
+
+![image](https://github.com/user-attachments/assets/200cd234-489b-4f99-976b-0739b684a488)    
+Dari sini, kita bisa coba cek topic yang berjalan...    
+
+![image](https://github.com/user-attachments/assets/9337b7d5-4f93-427c-b6bd-b1923bcd3426)
+
+Kita bisa cek topic dan apa yang dikirim/diterima suatu node dengan command berikut   
+```
+rostopic list
+rostopic echo [nama topic]
+```
 
 ## 3. Coba Bikin Package  
 Lanjut nih.. kita coba bikin simple publisher & subscriber  
@@ -181,6 +237,7 @@ find_package() diisi dengan package-package yang kita gunakan di workspace
 
 > CMakeLists ini pasti akan berbeda di setiap project, masih ada beberapa function di CMakeLists yang belum terpakai di sini :"]   
 
+
 ### Build Program   
 Untuk memastikan program kita udah bener, kita coba build dengan catkin_make  
 ```
@@ -203,6 +260,8 @@ terminal ketiga kita run node listener
 rosrun tutorial_ws listener
 ```
 kita bisa lihat bahwa listener dan talker saling mengirim dan menerima dengan jumlah count yang sinkron :D   
+
+## ------------------------------------- PART 1 DONE ----------------------------------
 
 
 
