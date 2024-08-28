@@ -64,6 +64,7 @@ selain CMakeLists, kita perlu mengatur beberapa konfigurasi pada xml sebagai ber
 ## How to use it? :0   
 Pada package utama kita, buat folder untuk setiap node (biar lebih rapi aja sih) dan isi dengan .cpp file untuk node nya   
 
+### PUBLISHER
 Untuk publisher yang akan menggunakan custom message yang telah dibuat, dapat diterapkan sebagai berikut   
 ```cpp
 #include "package_messages/Controller.h"
@@ -84,6 +85,7 @@ Pada main() kita buat publisher
 pub_controller = nh.advertise<package_messages::Controller>("Controller",10); //nh = nodehandle
 ```
 
+### SUBSCRIBER  
 Selanjutnya untuk node subscriber, kita bisa memanggil publisher dengan Callback()  
 kita include dulu custom message
 ```cpp
@@ -99,11 +101,41 @@ Selanjutnya kita panggil function callback
 ```cpp
 void controllerCallback(const package_messages::Controller::ConstPtr &Controller_msg);
 ```
+controllerCallback bisa diisi sebagai destinasi dari message yang diterima. Untuk contoh ini, kita menyimpan hasil subscribe ke data 'arr'
+```cpp
+void controllerCallback(const rody1_messages::Controller::ConstPtr &Controller_msg)
+{
+  memcpy(arr + 3, &Controller_msg->velx, 4);
+  memcpy(arr + 7, &Controller_msg->vely, 4);
+  memcpy(arr + 11, &Controller_msg->angvel, 4);
+}
+```
 
 Kemudian pada main() kita bisa tuliskan dengan   
 ```cpp
 sub_controller = nh.subscribe("Controller", 10, controllerCallback); // Subscribe to Controller topic
 ```
+
+### CMakeLists
+Untuk CMakeLists, kita hanya perlu menambahkan package custom message yang telah kita buat 
+```cmake
+find_package(catkin REQUIRED COMPONENTS
+      cmake_modules
+      roscpp
+      std_msgs
+      rody1_messages
+)
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
+
+catkin_package(
+  CATKIN_DEPENDS roscpp std_msgs rody1_messages
+)
+```
+
 
 
 
