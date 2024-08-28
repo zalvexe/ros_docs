@@ -1,4 +1,4 @@
-# ROS 1 - Noetic Modul 2024
+![image](https://github.com/user-attachments/assets/cd8ebbd5-9c1c-487d-b328-a98ae7c894fc)# ROS 1 - Noetic Modul 2024
 
 ## Apa itu ROS??  
 ROS (Robot Operating System) itu seperti sistem operasi buat robot, tapi bukan sistem operasi yang kita pakai sehari-hari di komputer. Bayangkan ROS sebagai toolkit besar yang menyediakan semua alat yang dibutuhkan robot untuk berpikir dan bertindak. Jadi, ROS itu semacam platform yang bikin robot bisa berinteraksi dengan dunia di sekelilingnya, ngolah data dari sensor, bergerak, dan berkomunikasi dengan perangkat lain.
@@ -12,9 +12,13 @@ ROS bikin hidup lebih mudah bagi para pengembang robot dengan menyediakan:
 
 Jadi, kalau kamu pengen bikin robot yang pintar, fleksibel, dan bisa berkomunikasi dengan komponen lain, ROS adalah alat yang bisa sangat membantu! :]   
      
-     
-     
+## Struktur ROS 
+
+![image](https://github.com/user-attachments/assets/5a85cc9c-f80c-4224-9df7-90751d3da54d)
+
+
 ## 1. Instalasi ROS 1 - Noetic
+[link untuk penjelasan lebih lengkap](https://wiki.ros.org/noetic/Installation/Ubuntu)  
 Untuk instalasi ROS1 Noetic, pastikan Operating System yang digunakan merupakan Ubuntu 20.04 oke :D   
 
 ### __Pra-instalasi :__      
@@ -73,9 +77,10 @@ sudo rosdep init
 
 rosdep update
 ```   
+## 2. Tes ROS dengan Turtlesim, topics
 
-## 2. Tes dulu dong ya   
-Sebelum lanjut nih.. kita tes dulu instalasi ROS tadi pake program simple publisher & subscriber  
+## 3. Coba Bikin Package  
+Lanjut nih.. kita coba bikin simple publisher & subscriber  
 
 Bikin workspace & package duluu  
 ```
@@ -106,12 +111,12 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
   ros::Rate loop_rate(1); // 1 Hz
-
+  int cnt = 0; 
   while (ros::ok())
   {
     std_msgs::String msg;
     std::stringstream ss;
-    ss << "Hello ROS " << ros::Time::now();
+    ss << "Hello ROS " << cnt++ << ros::Time::now();
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
@@ -176,13 +181,28 @@ find_package() diisi dengan package-package yang kita gunakan di workspace
 
 > CMakeLists ini pasti akan berbeda di setiap project, masih ada beberapa function di CMakeLists yang belum terpakai di sini :"]   
 
+### Build Program   
+Untuk memastikan program kita udah bener, kita coba build dengan catkin_make  
+```
+cd ~/tutorial_ws/
+catkin_make
+```
+
 ### Run program
-Setelah 
 Untuk run program ROS, kita akan perlu beberapa terminal :")     
-terminal pertama kita pake buat Roscore   
+terminal pertama kita pake buat roscore   
 ```
 roscore
 ```
 lanjut.. terminal kedua kita run node talker   
 ```
-ros run 
+rosrun tutorial_ws talker
+```
+terminal ketiga kita run node listener  
+```
+rosrun tutorial_ws listener
+```
+kita bisa lihat bahwa listener dan talker saling mengirim dan menerima dengan jumlah count yang sinkron :D   
+
+
+
