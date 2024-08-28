@@ -27,7 +27,7 @@ __2. Master:__
 ROS Master bertindak sebagai pendaftar pusat yang mengelola informasi tentang node, topik, dan layanan.
 Master memungkinkan node untuk menemukan satu sama lain dan berkomunikasi. Tanpa Master, node ngga bisa berkomunikasi.
 
-__3. Parameter Server:__
+__3. Parameter Server (rosparam):__
 
 Parameter Server adalah penyimpanan pusat untuk parameter konfigurasi yang dapat diakses oleh semua node. Parameter dapat digunakan untuk menyimpan konfigurasi yang dapat diubah tanpa perlu memodifikasi kode sumber.
 
@@ -93,7 +93,7 @@ source ~/.bashrc
 > untuk zsh bisa langsung diganti setup.zsh dan .zshrc
 
 
-### __Install Dependencies untuk Keperluan Building Package Python(optional) :__   
+### __Install Dependencies untuk Keperluan Building Package Python (optional) :__   
 ```
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
