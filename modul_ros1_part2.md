@@ -3,10 +3,11 @@
 Di part 2 ini akan bahas tentang custom messages :)  
 
 ## Custom Messages  
-Jadi gini, misal kita pingin bikin publisher sendiri dengan message yang kita custom sendiri.   
-contoh kita mau nerima data controller robot(velx,vely,angvel), nah kita bisa bikin message sendiri :]   
+Custom messages akan diperlukan ketika kita pingin bikin publisher sendiri dengan message yang kita custom sendiri.   
+Contoh jika kita mau nerima data controller robot (velx,vely,angvel), nah kita bisa bikin message sendiri dengan isi variable tersebut :]   
 
-Untuk lebih memudahkan struktur file, kita bisa membuat messages sebagai 'package' sendiri yang berisi hanya folder /msg.  
+__Untuk lebih memudahkan struktur file, kita bisa membuat messages sebagai 'package' sendiri yang berisi hanya folder /msg.__   
+
 di dalam folder /msg bisa kita isi dengan file ```Controller.msg``` dengan isi
 
 ```msg
@@ -17,7 +18,7 @@ float32 angvel
 selanjutnya untuk CMakelists, beberapa konfigurasi yang digunakan yaitu  
 ```cmake
 cmake_minimum_required(VERSION 3.0.2)
-project(nama package)
+project(package_messages)
 
 find_package(catkin REQUIRED COMPONENTS
   message_generation
@@ -101,7 +102,7 @@ Selanjutnya kita panggil function callback
 ```cpp
 void controllerCallback(const package_messages::Controller::ConstPtr &Controller_msg);
 ```
-controllerCallback bisa diisi sebagai destinasi dari message yang diterima. Untuk contoh ini, kita menyimpan hasil subscribe ke data 'arr'
+controllerCallback bisa diisi sebagai destinasi dari message yang diterima. Untuk contoh ini, kita menyimpan hasil subscribe ke array bernama 'arr'
 ```cpp
 void controllerCallback(const rody1_messages::Controller::ConstPtr &Controller_msg)
 {
@@ -124,7 +125,7 @@ find_package(catkin REQUIRED COMPONENTS
       cmake_modules
       roscpp
       std_msgs
-      rody1_messages
+      package_messages
 )
 
 include_directories(
@@ -133,10 +134,33 @@ include_directories(
 )
 
 catkin_package(
-  CATKIN_DEPENDS roscpp std_msgs rody1_messages
+  CATKIN_DEPENDS roscpp std_msgs package_messages
 )
 ```
 
+### XML
+Terakhir, kita perlu modifikasi file package.xml  
+```xml
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>package_messages</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>rody1_messages</build_export_depend>
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>message_generation</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>package_messages</exec_depend>
+```
+<h2 align="center">END OF PART 2? ....or is it?</h2>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a969e166-e017-468d-9a19-f971121819a8">
+</p>
 
 
 
