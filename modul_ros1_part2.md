@@ -105,11 +105,12 @@ controllerCallback bisa diisi sebagai destinasi dari message yang diterima. Untu
 ```cpp
 void controllerCallback(const rody1_messages::Controller::ConstPtr &Controller_msg)
 {
-  memcpy(arr + 3, &Controller_msg->velx, 4);
+  memcpy(arr + 3, &Controller_msg->velx, 4); 
   memcpy(arr + 7, &Controller_msg->vely, 4);
   memcpy(arr + 11, &Controller_msg->angvel, 4);
 }
 ```
+> 4 merupakan byte size dari data float
 
 Kemudian pada main() kita bisa tuliskan dengan   
 ```cpp
