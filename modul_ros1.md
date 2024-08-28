@@ -93,7 +93,7 @@ source ~/.bashrc
 > untuk zsh bisa langsung diganti setup.zsh dan .zshrc
 
 
-### __Install Dependencies untuk Keperluan Building Package Python (optional) :__   
+### __Install Dependencies untuk Keperluan Building Package Python:__   
 ```
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
