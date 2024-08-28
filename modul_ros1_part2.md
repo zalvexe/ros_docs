@@ -104,7 +104,7 @@ void controllerCallback(const package_messages::Controller::ConstPtr &Controller
 ```
 controllerCallback bisa diisi sebagai destinasi dari message yang diterima. Untuk contoh ini, kita menyimpan hasil subscribe ke array bernama 'arr'
 ```cpp
-void controllerCallback(const rody1_messages::Controller::ConstPtr &Controller_msg)
+void controllerCallback(const package_messages::Controller::ConstPtr &Controller_msg)
 {
   memcpy(arr + 3, &Controller_msg->velx, 4); 
   memcpy(arr + 7, &Controller_msg->vely, 4);
@@ -115,7 +115,7 @@ void controllerCallback(const rody1_messages::Controller::ConstPtr &Controller_m
 
 Kemudian pada main() kita bisa tuliskan dengan   
 ```cpp
-sub_controller = nh.subscribe("Controller", 10, controllerCallback); // Subscribe to Controller topic
+sub_controller = nh.subscribe("Controller", 10, controllerCallback); 
 ```
 
 ### CMakeLists
@@ -157,7 +157,7 @@ Terakhir, kita perlu modifikasi file package.xml
   <exec_depend>message_runtime</exec_depend>
   <exec_depend>package_messages</exec_depend>
 ```
-<h2 align="center">END OF PART 2? ....or is it?</h2>
+<h2 align="center">END OF PART 2.... or is it?</h2>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/a969e166-e017-468d-9a19-f971121819a8">
 </p>
