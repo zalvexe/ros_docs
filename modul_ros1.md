@@ -232,7 +232,7 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 ```
-dalam project() diisi dengan nama workspace   
+dalam project() diisi dengan nama package   
 find_package() diisi dengan package-package yang kita gunakan di workspace   
 
 > CMakeLists ini pasti akan berbeda di setiap project, masih ada beberapa function di CMakeLists yang belum terpakai di sini :"]   
@@ -263,7 +263,7 @@ rosrun tutorial_ws listener
 
 kita bisa lihat bahwa listener dan talker saling menerima dan mengirim dengan jumlah count yang sinkron :D   
 
-## ------------------------------------- PART 1 DONE ----------------------------------
-
-
-
+<h2 align="center">--- END OF PART 1 ---</h2>
+<p align="center">
+     <img src="https://github.com/user-attachments/assets/9b8c5daf-c66c-4216-a5bf-322112e92bc3">
+</p>
