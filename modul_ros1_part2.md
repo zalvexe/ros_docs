@@ -65,6 +65,8 @@ selain CMakeLists, kita perlu mengatur beberapa konfigurasi pada xml sebagai ber
 ## How to use it? :0   
 Pada package utama kita, buat folder untuk setiap node (biar lebih rapi aja sih) dan isi dengan .cpp file untuk node nya   
 
+Kalo udah, kita bisa lanjut bikin node publisher dan subscriber.     
+
 ### PUBLISHER
 Untuk publisher yang akan menggunakan custom message yang telah dibuat, dapat diterapkan sebagai berikut   
 ```cpp
