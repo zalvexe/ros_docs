@@ -163,6 +163,128 @@ Terakhir, kita perlu modifikasi file package.xml
 <p align="center">
   <img src="https://github.com/user-attachments/assets/a969e166-e017-468d-9a19-f971121819a8">
 </p>
+<h2 align="center">Belum ternyata.. ada dikit lagi heheheh :')</h2>
+
+## SRV
+srv (service) adalah mekanisme komunikasi yang memungkinkan node untuk melakukan panggilan prosedur jarak jauh (RPC). Komponen srv terdiri dari :   
+1. Request: Bagian dari pesan yang dikirim oleh klien ke server.    
+2. Response: Bagian dari pesan yang dikirim oleh server kembali ke klien.
+
+Pemakaian srv :  
+Service didefinisikan dalam file .srv. Misalnya, CalculateDistance.srv   
+```CalculateDistance.srv```   
+```srv
+float64 speed
+float64 time
+---
+float64 distance
+```
+
+Selanjutnya kita buat file Server dan dan Node   
+#### Server Node
+```cpp
+#include "ros/ros.h"
+#include "nama_package/CalculateDistance.h"
+
+bool calculateDistance(your_package_name::CalculateDistance::Request &req,
+                       your_package_name::CalculateDistance::Response &res)
+{
+  res.distance = req.speed * req.time;
+  ROS_INFO("request: speed=%f, time=%f", req.speed, req.time);
+  ROS_INFO("sending back response: distance=%f", res.distance);
+  return true;
+}
+
+int main(int argc, char **argv)
+{
+  ros::init(argc, argv, "calculate_distance_server");
+  ros::NodeHandle n;
+
+  ros::ServiceServer service = n.advertiseService("calculate_distance", calculateDistance);
+  ROS_INFO("Ready to calculate distance.");
+  ros::spin();
+
+  return 0;
+}
+```
+
+#### Client Node
+```cpp
+#include "ros/ros.h"
+#include "nama_package/CalculateDistance.h"
+#include <cstdlib>
+
+int main(int argc, char **argv)
+{
+  ros::init(argc, argv, "calculate_distance_client");
+  if (argc != 3)
+  {
+    ROS_INFO("usage: calculate_distance_client SPEED TIME");
+    return 1;
+  }
+
+  ros::NodeHandle n;
+  ros::ServiceClient client = n.serviceClient<your_package_name::CalculateDistance>("calculate_distance");
+  your_package_name::CalculateDistance srv;
+  srv.request.speed = atof(argv[1]);
+  srv.request.time = atof(argv[2]);
+
+  if (client.call(srv))
+  {
+    ROS_INFO("Distance: %f", srv.response.distance);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service calculate_distance");
+    return 1;
+  }
+
+  return 0;
+}
+```
+
+#### CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 2.8.3)
+project(your_package_name)
+
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  std_msgs
+)
+
+#nambahin srv
+add_service_files(
+  FILES
+  CalculateDistance.srv
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+
+catkin_package()
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+add_executable(calculate_distance_server src/calculate_distance_server.cpp)
+add_dependencies(calculate_distance_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(calculate_distance_server ${catkin_LIBRARIES})
+
+add_executable(calculate_distance_client src/calculate_distance_client.cpp)
+add_dependencies(calculate_distance_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(calculate_distance_client ${catkin_LIBRARIES})
+```
+
+
+
+
+
+
 
 
 
