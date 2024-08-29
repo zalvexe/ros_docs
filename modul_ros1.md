@@ -185,6 +185,7 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
+> loop_rate(1) mengartikan loop program berulang setiap 1 detik. Nilai loop_rate ini berbeda di program, untuk program yang kompleks biasanya digunakan loop_rate yang lebih cepat dan umumnya menggunakan ros timer
 
 ```listener.cpp```
 ```cpp
