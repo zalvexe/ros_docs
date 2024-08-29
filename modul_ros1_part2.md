@@ -186,8 +186,8 @@ Selanjutnya kita buat file Server dan dan Node
 #include "ros/ros.h"
 #include "nama_package/CalculateDistance.h"
 
-bool calculateDistance(your_package_name::CalculateDistance::Request &req,
-                       your_package_name::CalculateDistance::Response &res)
+bool calculateDistance(nama_package::CalculateDistance::Request &req,
+                       nama_package::CalculateDistance::Response &res)
 {
   res.distance = req.speed * req.time;
   ROS_INFO("request: speed=%f, time=%f", req.speed, req.time);
@@ -224,7 +224,7 @@ int main(int argc, char **argv)
   }
 
   ros::NodeHandle n;
-  ros::ServiceClient client = n.serviceClient<your_package_name::CalculateDistance>("calculate_distance");
+  ros::ServiceClient client = n.serviceClient<nama_package::CalculateDistance>("calculate_distance");
   your_package_name::CalculateDistance srv;
   srv.request.speed = atof(argv[1]);
   srv.request.time = atof(argv[2]);
@@ -279,6 +279,7 @@ add_executable(calculate_distance_client src/calculate_distance_client.cpp)
 add_dependencies(calculate_distance_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(calculate_distance_client ${catkin_LIBRARIES})
 ```
+<h2 align="center">END OF PART 2 (for real this time:)</h2>
 
 
 
