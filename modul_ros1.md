@@ -1,7 +1,9 @@
 # ROS 1 - Noetic Modul 2024
 
 ## Apa itu ROS??  
-ROS (Robot Operating System) itu seperti sistem operasi buat robot, tapi bukan sistem operasi yang kita pakai sehari-hari di komputer. Bayangkan ROS sebagai toolkit besar yang menyediakan semua alat yang dibutuhkan robot untuk berpikir dan bertindak. Jadi, ROS itu semacam platform yang bikin robot bisa berinteraksi dengan dunia di sekelilingnya, ngolah data dari sensor, bergerak, dan berkomunikasi dengan perangkat lain.
+ROS (Robot Operating System) adalah sebuah kerangka kerja yang dirancang untuk membantu pengembangan perangkat lunak robot. Meski namanya "Operating System", sebenarnya ROS bukanlah sistem operasi seperti Windows atau Linux. Sebaliknya, ROS adalah sekumpulan alat, pustaka, dan konvensi yang membantu para pengembang dalam membangun perangkat lunak robot.
+
+Dalam dunia pengembangan robot, ada banyak komponen yang harus berkomunikasi satu sama lain, seperti sensor, aktuator, dan sistem pemrosesan data. ROS menyediakan infrastruktur untuk mempermudah komunikasi ini, sehingga pengembang bisa lebih fokus pada logika atau fungsi robot itu sendiri, daripada memikirkan bagaimana komponen-komponen tersebut saling terhubung.
 
 ![image](https://github.com/user-attachments/assets/0bc3f43f-cc55-486e-9354-8350a6690132)
 
